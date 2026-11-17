@@ -51,6 +51,9 @@ describe("consent page", () => {
     const csp = consent.headers.get("Content-Security-Policy") ?? "";
     expect(csp).toContain("frame-ancestors 'none'");
     expect(csp).toContain("default-src 'none'");
+    // form-action would block the final redirect to the client's callback
+    // whenever GitHub answers without showing a page.
+    expect(csp).not.toContain("form-action");
   });
 
   it("refuses an approval posted without the browser's cookie", async () => {

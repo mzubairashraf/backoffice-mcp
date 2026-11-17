@@ -21,7 +21,11 @@ const app = new Hono<{ Bindings: Env }>();
 const html = (body: string, status = 200, headers?: Headers) => {
   const h = headers ?? new Headers();
   h.set("Content-Type", "text/html; charset=utf-8");
-  h.set("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; form-action 'self' https://github.com; frame-ancestors 'none'");
+  // No form-action directive: browsers apply it to every redirect that
+  // follows a form submission, and the consent form's chain ends at the MCP
+  // client's own callback URL, which can be any host. The form itself is
+  // protected by the single-use, cookie-bound handle instead.
+  h.set("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'");
   h.set("Referrer-Policy", "no-referrer");
   h.set("X-Content-Type-Options", "nosniff");
   return new Response(body, { status, headers: h });
