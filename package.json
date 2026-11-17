@@ -1,0 +1,32 @@
+{
+  "name": "backoffice-mcp",
+  "version": "0.1.0",
+  "description": "Remote MCP server (TypeScript, Cloudflare Workers) that connects AI agents to an invoicing back office with OAuth, scoped permissions, human confirmation and idempotent writes",
+  "scripts": {
+    "dev": "wrangler dev",
+    "typecheck": "wrangler types && tsc",
+    "test": "vitest run",
+    "deploy": "wrangler deploy --env production",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote --env production",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@cloudflare/workers-oauth-provider": "^1.2.4",
+    "@modelcontextprotocol/server": "2.4.0",
+    "agents": "^0.33.0",
+    "hono": "^4.13.19",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.8.3",
+    "@modelcontextprotocol/client": "2.4.0",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0",
+    "wrangler": "^4.163.0"
+  },
+  "private": true,
+  "type": "module"
+}

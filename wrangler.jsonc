@@ -1,0 +1,35 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "backoffice-mcp",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-06-11",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "observability": { "enabled": true },
+
+  // Local development values. `wrangler deploy --env production` uses the block below.
+  "vars": {
+    "MCP_RESOURCE": "http://localhost:8787/mcp",
+    "AUTH_MODE": "demo"
+  },
+  "kv_namespaces": [{ "binding": "OAUTH_KV", "id": "local-oauth-kv" }],
+  "d1_databases": [
+    { "binding": "DB", "database_name": "backoffice-mcp", "database_id": "local-backoffice-db", "migrations_dir": "migrations" }
+  ],
+
+  "env": {
+    "production": {
+      "vars": {
+        // Replace with the deployed URL, then deploy again.
+        "MCP_RESOURCE": "https://backoffice-mcp.YOUR-SUBDOMAIN.workers.dev/mcp",
+        "AUTH_MODE": "github",
+        "GITHUB_CLIENT_ID": "REPLACE_WITH_GITHUB_OAUTH_APP_CLIENT_ID"
+      },
+      // Secrets, set with `wrangler secret put --env production`:
+      //   CONFIRMATION_SECRET, GITHUB_CLIENT_SECRET
+      "kv_namespaces": [{ "binding": "OAUTH_KV", "id": "REPLACE_WITH_KV_NAMESPACE_ID" }],
+      "d1_databases": [
+        { "binding": "DB", "database_name": "backoffice-mcp", "database_id": "REPLACE_WITH_D1_DATABASE_ID", "migrations_dir": "migrations" }
+      ]
+    }
+  }
+}
