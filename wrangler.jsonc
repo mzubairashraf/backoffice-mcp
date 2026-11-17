@@ -18,17 +18,18 @@
 
   "env": {
     "production": {
+      "name": "backoffice-mcp",
       "vars": {
         // Replace with the deployed URL, then deploy again.
-        "MCP_RESOURCE": "https://backoffice-mcp.YOUR-SUBDOMAIN.workers.dev/mcp",
+        "MCP_RESOURCE": "https://backoffice-mcp.zashraf-b88.workers.dev/mcp",
         "AUTH_MODE": "github",
         "GITHUB_CLIENT_ID": "REPLACE_WITH_GITHUB_OAUTH_APP_CLIENT_ID"
       },
       // Secrets, set with `wrangler secret put --env production`:
       //   CONFIRMATION_SECRET, GITHUB_CLIENT_SECRET
-      "kv_namespaces": [{ "binding": "OAUTH_KV", "id": "REPLACE_WITH_KV_NAMESPACE_ID" }],
+      "kv_namespaces": [{ "binding": "OAUTH_KV", "id": "d3fe6c59286f4671b7ece7e35afeeba4" }],
       "d1_databases": [
-        { "binding": "DB", "database_name": "backoffice-mcp", "database_id": "REPLACE_WITH_D1_DATABASE_ID", "migrations_dir": "migrations" }
+        { "binding": "DB", "database_name": "backoffice-mcp", "database_id": "6a2990c7-e18e-46e6-8507-faa45e1ac624", "migrations_dir": "migrations" }
       ]
     }
   }
