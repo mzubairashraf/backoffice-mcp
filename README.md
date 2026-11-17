@@ -20,7 +20,13 @@ About 1,500 lines of TypeScript and 750 lines of tests.
 
 ## Try it
 
-Add the server's `/mcp` URL as a remote MCP server ("custom connector") in an MCP client such as Claude. Your client opens the sign-in page; each person who signs in gets a private workspace with sample data.
+A live instance runs at **https://backoffice-mcp.zashraf-b88.workers.dev**. Add this URL as a remote MCP server ("custom connector") in an MCP client such as Claude:
+
+```
+https://backoffice-mcp.zashraf-b88.workers.dev/mcp
+```
+
+Your client opens the sign-in page, where you choose what the assistant may do and sign in with GitHub (used only to identify you; no repository access is requested). Each person gets a private workspace with sample data.
 
 Things to ask:
 
